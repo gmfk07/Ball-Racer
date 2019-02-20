@@ -162,7 +162,7 @@ PrefabInstance:
     - target: {fileID: 683092076935929019, guid: 7e58c37653caa3c4c8bfc594f518e61f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 683092076935929019, guid: 7e58c37653caa3c4c8bfc594f518e61f,
         type: 3}
@@ -298,6 +298,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9425738}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &1095700953
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095700952}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!4 &1095700954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 683092076935929019, guid: 7e58c37653caa3c4c8bfc594f518e61f,
@@ -320,7 +336,8 @@ MonoBehaviour:
   laneDist: 2
   accel: 2
   maxVelocity: 7
---- !u!1001 &2212279835264966711
+  velocity: 0
+--- !u!1001 &1495845655
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -370,7 +387,7 @@ PrefabInstance:
     - target: {fileID: 2212279833337474904, guid: 0aef2bbd6223e1d41844894feb3fdf95,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2212279833337474904, guid: 0aef2bbd6223e1d41844894feb3fdf95,
         type: 3}
