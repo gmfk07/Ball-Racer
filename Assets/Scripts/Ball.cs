@@ -8,9 +8,10 @@ public class Ball : MonoBehaviour
     public float laneDist = 0.5f;
     public float accel = 2f;
     public float maxVelocity = 7f;
+    public float velocity = 0;
 
     private int lane = 0;
-    private float velocity = 0;
+    bool inRough = false;
 
     // Update is called once per frame
     void Update()
@@ -19,6 +20,18 @@ public class Ball : MonoBehaviour
             switchLanes(1);
         if (Input.GetKeyDown(KeyCode.S))
             switchLanes(-1);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.otherCollider.gameObject.tag == "Rough")
+            inRough = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.otherCollider.gameObject.tag == "Rough")
+            inRough = false;
     }
 
     void FixedUpdate()
