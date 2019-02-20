@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ed33da8c244584788a65853923ae73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lane: 0
   maxLane: 3
   laneDist: 1
+  accel: 2
+  maxVelocity: 7
