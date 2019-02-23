@@ -1798,14 +1798,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1887991456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f892a53a8049d443fa5bacba3cf82f80, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e028d0674bde34790d44af9762d3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerOne: {fileID: 666869139}
   playerTwo: {fileID: 734526809}
-  bowling: {fileID: 7089343950169482966, guid: 714dad3124e8f4e8fa6a90d8d4c0d7bf, type: 3}
-  basket: {fileID: 5079134444574893769, guid: 5cff4cc0f6d1a495d946363f3469d486, type: 3}
-  pingpong: {fileID: 7057347611642035866, guid: ff3d3d8500c5940cca9d63a9971a40eb,
+  bowling: {fileID: 7089343950169482966, guid: 2e78a4235fc776442bf4a8e014f8cc6e, type: 3}
+  basket: {fileID: 5079134444574893769, guid: c13a4e4bbf3f9364bb8a643978351de6, type: 3}
+  pingpong: {fileID: 7057347611642035866, guid: e22175a7ec4fa7946a2f23050eac0914,
     type: 3}
   playerOneCamera: {fileID: 519420031}
 --- !u!4 &1887991458
