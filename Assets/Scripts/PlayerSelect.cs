@@ -25,7 +25,7 @@ public class PlayerSelect : MonoBehaviour
         this.HideCanvas();
     }
 
-    public void BasketballChoic(int playerNumber)
+    public void BasketballChoice(int playerNumber)
     {
         if (playerNumber == 1)
             playerOneChoice = basket;
