@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8e37b382f645c4cbff6851669cb5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1478060908}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1464,6 +1464,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341011274}
   m_CullTransparentMesh: 0
+--- !u!4 &1478060908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2212279833337474904, guid: 0aef2bbd6223e1d41844894feb3fdf95,
+    type: 3}
+  m_PrefabInstance: {fileID: 1495845655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1483590641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,6 +1807,7 @@ MonoBehaviour:
   basket: {fileID: 5079134444574893769, guid: 5cff4cc0f6d1a495d946363f3469d486, type: 3}
   pingpong: {fileID: 7057347611642035866, guid: ff3d3d8500c5940cca9d63a9971a40eb,
     type: 3}
+  playerOneCamera: {fileID: 519420031}
 --- !u!4 &1887991458
 Transform:
   m_ObjectHideFlags: 0

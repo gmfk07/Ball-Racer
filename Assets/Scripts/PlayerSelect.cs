@@ -14,6 +14,8 @@ public class PlayerSelect : MonoBehaviour
     public GameObject basket;
     public GameObject pingpong;
 
+    public Camera playerOneCamera;
+
     public void BowlingballChoice(int playerNumber)
     {
         if (playerNumber == 1)
@@ -43,8 +45,19 @@ public class PlayerSelect : MonoBehaviour
 
     public void Populate(int playerNumber, GameObject type)
     {
-        Vector3 pos = new Vector3(0, playerNumber, 0);
+        Vector3 pos = new Vector3(0, 0, 0);
         GameObject obj = Instantiate(type, pos, transform.rotation);
+        Ball ballScript = obj.GetComponent<Ball>();
+        ballScript.startingLane = playerNumber;
+        if (playerNumber == -1)
+            ballScript.player = 2;
+        else
+        { 
+            ballScript.player = 1;
+            FollowBall follow = playerOneCamera.GetComponent<FollowBall>();
+            follow.target = obj.transform;
+        }
+
     }
 
 
