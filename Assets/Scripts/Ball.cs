@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public int maxLane = 3;
-    public float laneDist = 0.5f;
+    public int startingLane = 0;
+    public int maxLane = 1;
+    public float laneDist = 2f;
     public float accel = 2f;
     public float maxVelocity = 7f;
     public float velocity = 0;
@@ -13,6 +14,16 @@ public class Ball : MonoBehaviour
     private int lane = 0;
     bool inRough = false;
 
+    private void Start()
+    {
+        Debug.Log("HI");
+        // Change the Y transform by 2*starting lane where lanes are -1, 0 1
+        Vector3 position = this.transform.position;
+        Vector3 startMove = new Vector3(0, this.transform.position.y + 2 * startingLane,0);
+        lane = (int) (this.transform.position.y + startingLane);
+        this.transform.position = position + startMove;
+        Debug.Log(lane);
+    }
     // Update is called once per frame
     void Update()
     {
