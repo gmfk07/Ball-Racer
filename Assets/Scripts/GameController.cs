@@ -17,18 +17,28 @@ public class GameController : MonoBehaviour
     [Header("Debug")]
     public bool debugGameStarted;
     public bool debugGameFinished;
+
+    private bool gameStarted;
+    private bool gameFinished;
+
+    private Ball playerOneBall;
+    private Ball playerTwoBall;
     
     void Start()
     {
         debugGameStarted = false;
         debugGameFinished = false;
+
+        gameStarted = false;
+        gameFinished = false;
     }
     
     void Update()
     {
-        //update debug variables using implemented functions
+        debugGameStarted = gameStarted;
+        debugGameFinished = gameFinished;
 
-        //check for game being finished
+        //TODO: check for game being finished
     }
 
     //// Public Methods
@@ -42,7 +52,14 @@ public class GameController : MonoBehaviour
     /// <param name="playerTwo">The ball object controlled by player 2</param>
     public void startGame(Ball playerOne, Ball playerTwo)
     {
-        throw new System.Exception("not implemented");
+        this.playerOneBall = playerOne;
+        this.playerTwoBall = playerTwo;
+
+        gameStarted = true;
+
+        //start the countdown, which will have the balls start moving when it's done
+        IEnumerator countdownRoutine = doCountdown();
+        StartCoroutine(countdownRoutine);
     }
 
 
@@ -53,18 +70,18 @@ public class GameController : MonoBehaviour
     /// Check if the game started
     /// </summary>
     /// <returns>Returns true iff startGame has been called</returns>
-    public bool gameStarted()
+    public bool isGameStarted()
     {
-        throw new System.Exception("not implemented");
+        return gameStarted;
     }
     
     /// <summary>
     /// Check if the game is over
     /// </summary>
     /// <returns>Returns true iff both balls have reached the finish line</returns>
-    public bool gameFinished()
+    public bool isGameFinished()
     {
-        throw new System.Exception("not implemented");
+        return gameFinished;
     }
 
 
