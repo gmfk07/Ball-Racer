@@ -16,6 +16,13 @@ public class PlayerSelect : MonoBehaviour
 
     public Camera playerOneCamera;
 
+    private GameController gameController;
+
+    void Start()
+    {
+        gameController = this.gameObject.GetComponent<GameController>();
+    }
+
     public void BowlingballChoice(int playerNumber)
     {
         if (playerNumber == 1)
@@ -43,7 +50,7 @@ public class PlayerSelect : MonoBehaviour
         this.HideCanvas();
     }
 
-    public void Populate(int playerNumber, GameObject type)
+    public Ball Populate(int playerNumber, GameObject type)
     {
         Vector3 pos = new Vector3(0, 0, 0);
         GameObject obj = Instantiate(type, pos, transform.rotation);
@@ -58,6 +65,7 @@ public class PlayerSelect : MonoBehaviour
             follow.target = obj.transform;
         }
 
+        return ballScript;
     }
 
 
@@ -71,8 +79,10 @@ public class PlayerSelect : MonoBehaviour
         else if (playerTwo.isActiveAndEnabled)
         {
             playerTwo.gameObject.SetActive(false);
-            Populate(1, playerOneChoice);
-            Populate(-1, playerTwoChoice);
+            Ball ballOne = Populate(1, playerOneChoice);
+            Ball ballTwo = Populate(-1, playerTwoChoice);
+
+            gameController.startGame(ballOne, ballTwo);
         }
     }
 }
