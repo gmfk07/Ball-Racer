@@ -120,6 +120,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void startRace()
     {
-        throw new System.Exception("not implemented");
+        playerOneBall.startMoving();
+        playerTwoBall.startMoving();
     }
 }

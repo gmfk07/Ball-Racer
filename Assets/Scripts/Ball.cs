@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour
 
     public int player = 1;
 
+    private bool canMove;
+
     private void Start()
     {
         // Change the Y transform by 2*starting lane where lanes are -1, 0 1
@@ -23,6 +25,8 @@ public class Ball : MonoBehaviour
         Vector3 startMove = new Vector3(0, this.transform.position.y + 2 * startingLane,0);
         lane = (int) (this.transform.position.y + startingLane);
         this.transform.position = position + startMove;
+
+        canMove = false;
     }
     // Update is called once per frame
     void Update()
@@ -57,8 +61,11 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
-        gameObject.transform.position += new Vector3(velocity*Time.deltaTime, 0, 0);
-        velocity = Mathf.Max(maxVelocity, velocity + accel * Time.deltaTime);
+        if (canMove)
+        {
+            gameObject.transform.position += new Vector3(velocity * Time.deltaTime, 0, 0);
+            velocity = Mathf.Max(maxVelocity, velocity + accel * Time.deltaTime);
+        }
     }
 
     private void switchLanes(int laneAmt)
@@ -73,5 +80,11 @@ public class Ball : MonoBehaviour
     public void SetPlayer(int playerNumber)
     {
         player = playerNumber;
+    }
+
+    //cue for the race starting
+    public void startMoving()
+    {
+        this.canMove = true;
     }
 }
