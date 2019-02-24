@@ -15,6 +15,7 @@ public class PlayerSelect : MonoBehaviour
     public GameObject pingpong;
 
     public Camera playerOneCamera;
+    public Camera playerTwoCamera;
 
     private GameController gameController;
 
@@ -57,7 +58,11 @@ public class PlayerSelect : MonoBehaviour
         Ball ballScript = obj.GetComponent<Ball>();
         ballScript.startingLane = playerNumber;
         if (playerNumber == -1)
+        {
             ballScript.player = 2;
+            FollowBall follow = playerTwoCamera.GetComponent<FollowBall>();
+            follow.target = obj.transform;
+        }
         else
         { 
             ballScript.player = 1;
