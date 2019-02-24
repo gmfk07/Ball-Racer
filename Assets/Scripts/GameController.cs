@@ -11,7 +11,8 @@ using UnityEngine.UI;
  */
 public class GameController : MonoBehaviour
 {
-    public GameObject canvasPrefab;
+    public GameObject countdownPrefab;
+    public GameObject winnerPrefab;
     public Board gameBoard;
 
     private bool gameStarted;
@@ -24,6 +25,9 @@ public class GameController : MonoBehaviour
 
     private enum WinnerChoice {None, One, Two, Tie};
     private WinnerChoice gameWinner;
+    //keeping a reference to any created winner text since it doesn't delete itself
+    private bool createdWinner;
+    private GameObject winnerText;
 
     //a way to check where the balls are on the board
     private float boardStart;
@@ -59,6 +63,11 @@ public class GameController : MonoBehaviour
         playerTwoDone = false;
 
         gameWinner = WinnerChoice.None;
+        if (createdWinner)
+        {
+            Destroy(winnerText);
+        }
+        createdWinner = false;
 
         boardStart = gameBoard.transform.position.x - (gameBoard.boardSize / 2);
         boardEnd = gameBoard.boardSize;
@@ -96,6 +105,27 @@ public class GameController : MonoBehaviour
                 {
                     //at this point, must be the case that only one or the other is done
                     gameWinner = playerOneDone ? WinnerChoice.One : WinnerChoice.Two;
+                }
+            }
+
+            //if a winner was determined, create the text
+            if (!createdWinner && gameWinner != WinnerChoice.None)
+            {
+                createdWinner = true;
+                winnerText = Instantiate(winnerPrefab, this.transform) as GameObject;
+                Text winTextComponent = winnerText.GetComponentInChildren<Text>();
+
+                switch (gameWinner)
+                {
+                    case WinnerChoice.One:
+                        winTextComponent.text = "Player One Wins!";
+                        break;
+                    case WinnerChoice.Two:
+                        winTextComponent.text = "Player Two Wins!";
+                        break;
+                    case WinnerChoice.Tie:
+                        winTextComponent.text = "Tie Game!";
+                        break;
                 }
             }
         }
@@ -157,7 +187,7 @@ public class GameController : MonoBehaviour
     /// <returns>whatever IEnumerators do to yield things</returns>
     private IEnumerator doCountdown()
     {
-        var countdownCanvas = Instantiate(this.canvasPrefab, this.transform) as GameObject;
+        var countdownCanvas = Instantiate(this.countdownPrefab, this.transform) as GameObject;
         Text countdownText = countdownCanvas.GetComponentInChildren<Text>();
 
         //do the countdown, yielding for a second between counts;

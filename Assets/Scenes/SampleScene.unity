@@ -1847,7 +1847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3f1d5c756e27b42a8828faad49e22f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasPrefab: {fileID: 1965569440867225886, guid: 4499a84007e354546b363e755075b175,
+  countdownPrefab: {fileID: 1965569440867225886, guid: 4499a84007e354546b363e755075b175,
+    type: 3}
+  winnerPrefab: {fileID: 2810434010310935144, guid: c3c3cbe1f0b1f2349a363f3b507f40d0,
     type: 3}
   gameBoard: {fileID: 900460958}
 --- !u!1 &1970679169
