@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rough
+  - Smooth
   layers:
   - Default
   - TransparentFX
