@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /**
  * This handles the overall flow of the game (starting/finishing)
@@ -127,6 +128,8 @@ public class GameController : MonoBehaviour
                         winTextComponent.text = "Tie Game!";
                         break;
                 }
+                Button resetButton = winnerText.GetComponentInChildren<Button>();
+                resetButton.onClick.AddListener(RestartGame);
             }
         }
     }
@@ -174,10 +177,17 @@ public class GameController : MonoBehaviour
         return gameFinished;
     }
 
+    //Restarts the scene for a new game
+    void RestartGame()
+    {
+        Debug.Log("Reset?");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
 
     //// Private Methods
-    
+
     /// <summary>
     /// Performs the countdown for the start of a race.
     /// 
