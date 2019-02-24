@@ -19,6 +19,11 @@ public class GameController : MonoBehaviour
 
     private Ball playerOneBall;
     private Ball playerTwoBall;
+    private bool playerOneDone;
+    private bool playerTwoDone;
+
+    private enum WinnerChoice {None, One, Two, Tie};
+    private WinnerChoice gameWinner;
 
     //a way to check where the balls are on the board
     private float boardStart;
@@ -40,8 +45,20 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
+        initialize();
+    }
+
+    /// <summary>
+    /// Resets variables that keep track of game state.
+    /// </summary>
+    private void initialize()
+    {
         gameStarted = false;
         gameFinished = false;
+        playerOneDone = false;
+        playerTwoDone = false;
+
+        gameWinner = WinnerChoice.None;
 
         boardStart = gameBoard.transform.position.x - (gameBoard.boardSize / 2);
         boardEnd = gameBoard.boardSize;
@@ -49,14 +66,38 @@ public class GameController : MonoBehaviour
     
     void Update()
     {
+        //there's probably a way to clean up this logic but
+
         if (gameStarted && !gameFinished)
         {
-            //check if game is over
-            if (positionOne > boardEnd && positionTwo > boardEnd)
+            //check if each player has finished
+            if (!playerOneDone && positionOne > boardEnd)
             {
-                gameFinished = true;
+                playerOneDone = true;
             }
-            //TODO: more elaborate thing to check who won
+            if (!playerTwoDone && positionTwo > boardEnd)
+            {
+                playerTwoDone = true;
+            }
+
+            //check to determine the winner and if the game is finished
+            if (playerOneDone || playerTwoDone)
+            {
+                if (playerOneDone && playerTwoDone)
+                {
+                    if (gameWinner == WinnerChoice.None)
+                    {
+                        gameWinner = WinnerChoice.Tie;
+                    }
+                    gameFinished = true;
+                }
+                
+                else if (gameWinner == WinnerChoice.None)
+                {
+                    //at this point, must be the case that only one or the other is done
+                    gameWinner = playerOneDone ? WinnerChoice.One : WinnerChoice.Two;
+                }
+            }
         }
     }
 
