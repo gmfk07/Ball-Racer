@@ -7,12 +7,15 @@ public class Ball : MonoBehaviour
     public int startingLane = 0;
     public int maxLane = 1;
     public float laneDist = 2f;
-    public float accel = 2f;
+    public float regularAccel = 2f;
+    public float roughAccel = -.3f;
+    public float smoothAccel = 3f;
     public float maxVelocity = 7f;
     public float velocity = 0;
 
     private int lane = 0;
-    bool inRough = false;
+    public bool inRough = false;
+    public bool inSmooth = false;
 
     public int player = 1;
 
@@ -47,20 +50,45 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.otherCollider.gameObject.tag == "Rough")
-            inRough = true;
+        string othertag = collision.gameObject.tag;
+        switch (othertag)
+        {
+            case "Rough":
+                inRough = true;
+                break;
+
+            case "Smooth":
+                inSmooth = true;
+                break;
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.otherCollider.gameObject.tag == "Rough")
-            inRough = false;
+        string othertag = collision.gameObject.tag;
+        switch (othertag)
+        {
+            case "Rough":
+                inRough = false;
+                break;
+
+            case "Smooth":
+                inSmooth = false;
+                break;
+        }
     }
 
     void FixedUpdate()
     {
+        float accel;
+        if (inRough)
+            accel = roughAccel;
+        else if (inSmooth)
+            accel = smoothAccel;
+        else
+            accel = regularAccel;
         if (canMove)
         {
             gameObject.transform.position += new Vector3(velocity * Time.deltaTime, 0, 0);

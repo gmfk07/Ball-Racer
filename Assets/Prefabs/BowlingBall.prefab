@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7089343950169482963}
   - component: {fileID: 7089343950169482960}
   - component: {fileID: 7089343950169482961}
+  - component: {fileID: 4239069452122808807}
   m_Layer: 0
   m_Name: BowlingBall
   m_TagString: Untagged
@@ -97,9 +98,14 @@ MonoBehaviour:
   startingLane: 0
   maxLane: 1
   laneDist: 2
-  accel: 2
+  regularAccel: 2
+  roughAccel: -0.3
+  smoothAccel: 3
   maxVelocity: 7
   velocity: 0
+  inRough: 0
+  inSmooth: 0
+  player: 1
 --- !u!58 &7089343950169482961
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,7 +121,28 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.1
+--- !u!50 &4239069452122808807
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089343950169482966}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7089343950218588737
 GameObject:
   m_ObjectHideFlags: 0
