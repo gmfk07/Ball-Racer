@@ -12,33 +12,52 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject canvasPrefab;
-
-    //debug variables to check if things are working from the editor; should remove later
-    [Header("Debug")]
-    public bool debugGameStarted;
-    public bool debugGameFinished;
+    public Board gameBoard;
 
     private bool gameStarted;
     private bool gameFinished;
 
     private Ball playerOneBall;
     private Ball playerTwoBall;
+
+    //a way to check where the balls are on the board
+    private float boardStart;
+    private float boardEnd;
+    private float positionOne
+    {
+        get
+        {
+            return playerOneBall.transform.position.x - boardStart;
+        }
+    }
+    private float positionTwo
+    {
+        get
+        {
+            return playerTwoBall.transform.position.x - boardStart;
+        }
+    }
     
     void Start()
     {
-        debugGameStarted = false;
-        debugGameFinished = false;
-
         gameStarted = false;
         gameFinished = false;
+
+        boardStart = gameBoard.transform.position.x - (gameBoard.boardSize / 2);
+        boardEnd = gameBoard.boardSize;
     }
     
     void Update()
     {
-        debugGameStarted = gameStarted;
-        debugGameFinished = gameFinished;
-
-        //TODO: check for game being finished
+        if (gameStarted && !gameFinished)
+        {
+            //check if game is over
+            if (positionOne > boardEnd && positionTwo > boardEnd)
+            {
+                gameFinished = true;
+            }
+            //TODO: more elaborate thing to check who won
+        }
     }
 
     //// Public Methods
