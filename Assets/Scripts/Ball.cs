@@ -92,7 +92,7 @@ public class Ball : MonoBehaviour
         if (canMove)
         {
             gameObject.transform.position += new Vector3(velocity * Time.deltaTime, 0, 0);
-            velocity = Mathf.Max(maxVelocity, velocity + accel * Time.deltaTime);
+            velocity = Mathf.Min(maxVelocity, velocity + accel * Time.deltaTime);
         }
     }
 
