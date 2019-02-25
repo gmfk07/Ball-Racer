@@ -24,11 +24,11 @@ public class TitleController : MonoBehaviour
 
     void Start()
     {
+        buttonArray = new Button[] { startButton, instructionsButton, legalButton };
+
         setMainButtonActivity(true);
         instructionsOverlay.SetActive(false);
         legalOverlay.SetActive(false);
-
-        buttonArray = new Button[] { startButton, instructionsButton, legalButton };
     }
 
     /// <summary>
