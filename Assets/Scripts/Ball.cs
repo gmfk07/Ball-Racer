@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     public float roughAccel = -.3f;
     public float smoothAccel = 3f;
     public float maxVelocity = 7f;
+    public float minVelocity = 1f;
     public float velocity = 0;
 
     private int lane = 0;
@@ -92,7 +93,8 @@ public class Ball : MonoBehaviour
         if (canMove)
         {
             gameObject.transform.position += new Vector3(velocity * Time.deltaTime, 0, 0);
-            velocity = Mathf.Min(maxVelocity, velocity + accel * Time.deltaTime);
+            velocity = Mathf.Min(maxVelocity, velocity + (accel * Time.deltaTime));
+            if (velocity < minVelocity) velocity = minVelocity;
         }
     }
 

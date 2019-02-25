@@ -193,10 +193,11 @@ MonoBehaviour:
   startingLane: -1
   maxLane: 1
   laneDist: 2
-  regularAccel: 2
-  roughAccel: -0.3
+  regularAccel: 3
+  roughAccel: -20
   smoothAccel: 3
-  maxVelocity: 7
+  maxVelocity: 15
+  minVelocity: 1
   velocity: 0
   inRough: 0
   inSmooth: 0
