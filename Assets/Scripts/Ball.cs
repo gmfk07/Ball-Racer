@@ -13,14 +13,16 @@ public class Ball : MonoBehaviour
     public float maxVelocity = 7f;
     public float minVelocity = 1f;
     public float velocity = 0;
+    public float verticalVelocity;
 
-    private int lane = 0;
+    public int lane = 0;
     public bool inRough = false;
     public bool inSmooth = false;
 
     public int player = 1;
 
     private bool canMove;
+    private bool canSwitch = true;
 
     private void Start()
     {
@@ -49,6 +51,13 @@ public class Ball : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow))
                 switchLanes(-1);
         }
+    }
+
+    private IEnumerator LaneMove()
+    {
+        yield return new WaitForSeconds(.5f);
+        canSwitch = true;
+        verticalVelocity = 0;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -92,7 +101,7 @@ public class Ball : MonoBehaviour
             accel = regularAccel;
         if (canMove)
         {
-            gameObject.transform.position += new Vector3(velocity * Time.deltaTime, 0, 0);
+            gameObject.transform.position += new Vector3(velocity * Time.deltaTime, verticalVelocity*Time.deltaTime, 0);
             velocity = Mathf.Min(maxVelocity, velocity + (accel * Time.deltaTime));
             if (velocity < minVelocity) velocity = minVelocity;
         }
@@ -100,10 +109,15 @@ public class Ball : MonoBehaviour
 
     private void switchLanes(int laneAmt)
     {
-        if (Mathf.Abs(lane + laneAmt) <= maxLane)
+        if (Mathf.Abs(lane + laneAmt) <= maxLane && canSwitch && canMove)
         {
+            canSwitch = false;
             lane += laneAmt;
-            gameObject.transform.position += new Vector3(0, laneAmt * laneDist, 0);
+            if (Mathf.Sign(laneAmt) == 1)
+                verticalVelocity = laneDist*2;
+            else
+                verticalVelocity = -laneDist*2;
+            StartCoroutine(LaneMove());
         }
     }
 
