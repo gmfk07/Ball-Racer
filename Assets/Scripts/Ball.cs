@@ -13,7 +13,8 @@ public class Ball : MonoBehaviour
     public float maxVelocity = 7f;
     public float minVelocity = 1f;
     public float velocity = 0;
-    public float verticalVelocity;
+    public float verticalVelocity = 0;
+    public float laneSwapSpeed = 4;
 
     public int lane = 0;
     public bool inRough = false;
@@ -22,7 +23,6 @@ public class Ball : MonoBehaviour
     public int player = 1;
 
     private bool canMove;
-    private bool canSwitch = true;
 
     private void Start()
     {
@@ -51,13 +51,6 @@ public class Ball : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow))
                 switchLanes(-1);
         }
-    }
-
-    private IEnumerator LaneMove()
-    {
-        yield return new WaitForSeconds(.5f);
-        canSwitch = true;
-        verticalVelocity = 0;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -101,23 +94,38 @@ public class Ball : MonoBehaviour
             accel = regularAccel;
         if (canMove)
         {
+            Vector3 pos = gameObject.transform.position;
             gameObject.transform.position += new Vector3(velocity * Time.deltaTime, verticalVelocity*Time.deltaTime, 0);
             velocity = Mathf.Min(maxVelocity, velocity + (accel * Time.deltaTime));
             if (velocity < minVelocity) velocity = minVelocity;
+            if (verticalVelocity < 0)
+            {
+                if (pos.y <= lane * laneDist)
+                {
+                    gameObject.transform.position.Set(pos.x, lane * laneDist, pos.z);
+                    verticalVelocity = 0;
+                }
+            }
+            if (verticalVelocity > 0)
+            {
+                if (pos.y >= lane * laneDist)
+                {
+                    gameObject.transform.position.Set(pos.x, lane * laneDist, pos.z);
+                    verticalVelocity = 0;
+                }
+            }
         }
     }
 
     private void switchLanes(int laneAmt)
     {
-        if (Mathf.Abs(lane + laneAmt) <= maxLane && canSwitch && canMove)
+        if (Mathf.Abs(lane + laneAmt) <= maxLane && verticalVelocity == 0 && canMove)
         {
-            canSwitch = false;
             lane += laneAmt;
-            if (Mathf.Sign(laneAmt) == 1)
-                verticalVelocity = laneDist*2;
+            if (laneAmt == 1)
+                verticalVelocity = laneSwapSpeed;
             else
-                verticalVelocity = -laneDist*2;
-            StartCoroutine(LaneMove());
+                verticalVelocity = -laneSwapSpeed;
         }
     }
 

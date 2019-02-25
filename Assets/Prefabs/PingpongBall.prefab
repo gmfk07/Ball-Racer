@@ -199,6 +199,9 @@ MonoBehaviour:
   maxVelocity: 10
   minVelocity: 1
   velocity: 0
+  verticalVelocity: 0
+  laneSwapSpeed: 4
+  lane: 0
   inRough: 0
   inSmooth: 0
   player: 1
