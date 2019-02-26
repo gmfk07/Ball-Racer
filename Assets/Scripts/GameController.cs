@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
     private bool createdWinner;
     private GameObject winnerText;
 
+    private const string titleScene = "TitleScene";
+
     //a way to check where the balls are on the board
     private float boardStart;
     private float boardEnd;
@@ -128,8 +130,13 @@ public class GameController : MonoBehaviour
                         winTextComponent.text = "Tie Game!";
                         break;
                 }
-                Button resetButton = winnerText.GetComponentInChildren<Button>();
+
+                //set up buttons to reset game
+                Button resetButton = winnerText.transform.Find("Reset").GetComponent<Button>();
                 resetButton.onClick.AddListener(RestartGame);
+
+                Button titleButton = winnerText.transform.Find("ToTitle").GetComponent<Button>();
+                titleButton.onClick.AddListener(toTitle);
             }
         }
     }
@@ -180,8 +187,13 @@ public class GameController : MonoBehaviour
     //Restarts the scene for a new game
     void RestartGame()
     {
-        Debug.Log("Reset?");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    //returns to title scene
+    void toTitle()
+    {
+        SceneManager.LoadScene(titleScene);
     }
 
 
