@@ -99,7 +99,7 @@ MonoBehaviour:
   maxLane: 1
   laneDist: 2
   regularAccel: 2
-  roughAccel: -15
+  roughAccel: -18
   smoothAccel: 10
   maxVelocity: 20
   minVelocity: 1
