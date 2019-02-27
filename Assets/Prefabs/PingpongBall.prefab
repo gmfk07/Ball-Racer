@@ -200,7 +200,7 @@ MonoBehaviour:
   minVelocity: 1
   velocity: 0
   verticalVelocity: 0
-  laneSwapSpeed: 4
+  laneSwapSpeed: 5.25
   lane: 0
   inRough: 0
   inSmooth: 0

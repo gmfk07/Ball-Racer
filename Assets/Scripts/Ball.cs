@@ -39,16 +39,16 @@ public class Ball : MonoBehaviour
     {
         if (player == 1) 
         { 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
                 switchLanes(1);
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
                 switchLanes(-1);
         }
         if (player == 2)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow))
                 switchLanes(1);
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow))
                 switchLanes(-1);
         }
     }
